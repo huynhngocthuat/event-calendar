@@ -77,7 +77,12 @@ class EventEdit(generic.UpdateView):
     model = Event
     fields = ["title", "description", "start_time", "end_time"]
     template_name = "event.html"
+    success_url = reverse_lazy("calendarapp:all_events")
 
+class EventDelete(generic.DeleteView):
+    model = Event
+    template_name = "event_delete.html"
+    success_url = reverse_lazy("calendarapp:all_events")
 
 @login_required(login_url="signup")
 def event_details(request, event_id):
@@ -97,7 +102,7 @@ def add_eventmember(request, event_id):
             if member.count() <= 9:
                 user = forms.cleaned_data["user"]
                 EventMember.objects.create(event=event, user=user)
-                return redirect("calendarapp:calendar")
+                return redirect("calendarapp:all_events")
             else:
                 print("--------------User limit exceed!-----------------")
     context = {"form": forms}

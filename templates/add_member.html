@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Add EventMember
 {% endblock %}
 
 {% block content %}
-<div class="clearfix">
-  <a class="btn btn-info left" href="{% url 'calendarapp:calendar' %}"> Calendar </a>
+<div class="col-2 offset-4 mt-4">
+  <form method="post" >
+    {% csrf_token %}
+
+    <table class="form form-table mt-5 mb-3">
+      {{ form }}
+    </table>
+    <tr>
+      <button type="submit"  class="btn btn-primary float-right ml-2"> Submit </button>
+      <button class="btn btn-info float-right"><a href="{% url 'calendarapp:all_events' %}"> Back </a></button>
+    </tr>
+  </form>
+  {% endblock %}
 </div>
 
-<form method="post">
-  {% csrf_token %}
-  <table class="form form-table">
-    {{ form }}
-    <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
-  </table>
-</form>
-{% endblock %}
