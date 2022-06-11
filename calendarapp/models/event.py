@@ -1,6 +1,8 @@
 from datetime import datetime
 from django.db import models
 from django.urls import reverse
+from sqlalchemy import asc, null
+from torch import t
 
 from calendarapp.models import EventAbstract
 from accounts.models import User
@@ -10,7 +12,10 @@ class EventManager(models.Manager):
     """ Event manager """
 
     def get_all_events(self, user):
-        events = Event.objects.filter(user=user, is_active=True, is_deleted=False)
+        events = Event.objects.filter(user=user, is_active=True, is_deleted=False).order_by("start_time").reverse()
+        for item in events:
+            if item.end_time.date() < datetime.now().date():
+                item.is_active = False
         return events
 
     def get_running_events(self, user):

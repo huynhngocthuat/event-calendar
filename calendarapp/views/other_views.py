@@ -101,6 +101,13 @@ def add_eventmember(request, event_id):
             event = Event.objects.get(id=event_id)
             if member.count() <= 9:
                 user = forms.cleaned_data["user"]
+                Event.objects.create(
+                    user=user,
+                    title=event.title + " with " +  str(request.user),
+                    description=event.description,
+                    start_time=event.start_time,
+                    end_time=event.end_time,
+                )
                 EventMember.objects.create(event=event, user=user)
                 return redirect("calendarapp:all_events")
             else:

@@ -112,10 +112,8 @@
           },
           editable: true,
           dayMaxEvents: true, // allow "more" link when too many events
-          events: {{ events|safe }},
-
+          events: {{events | safe}},
         });
-
         calendar.render();
       });
       const closeBtn1 = document.getElementById('modalClose1');

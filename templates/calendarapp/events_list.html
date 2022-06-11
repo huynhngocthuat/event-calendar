@@ -26,13 +26,13 @@
                                 <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 201.641px;">SL</th>
-                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Event Name</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 151.641px;">SL</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 367.312px;">Event Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Start Time</th>
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">End Time</th>
-                                            <th tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;"></th>
-                                            <th tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;"></th>
-                                            <th tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;"></th>
+                                            <th tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 122.141px;"></th>
+                                            <th tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 122.141px;"></th>
+                                            <th tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 122.141px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,9 +42,15 @@
                                                 <td>{{ event.title }}</td>
                                                 <td>{{ event.start_time }}</td>
                                                 <td>{{ event.end_time }}</td>
-                                                <td><a class="btn btn-success right" href="{% url 'calendarapp:add_eventmember' event.id %}"> Add Member </a></td>
-                                                <td><a class="btn btn-info right mr-2" href="{% url 'calendarapp:event_edit' event.id %}"> Edit Event </a></td>
-                                                <td><a class="btn btn-danger" href="{% url 'calendarapp:remove_event' event.id %}">Remove</a></td>
+                                                {% if event.is_active == 1 %} 
+                                                    <td><a class="btn btn-success right" href="{% url 'calendarapp:add_eventmember' event.id %}"> Add Member </a></td>
+                                                    <td><a class="btn btn-info right mr-2" href="{% url 'calendarapp:event_edit' event.id %}"> Edit Event </a></td>
+                                                    <td><a class="btn btn-danger" href="{% url 'calendarapp:remove_event' event.id %}"> Remove </a></td>
+                                                {% else %}
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                {% endif %}
                                             </tr>
                                         {% endfor %}
                                     </tbody>
