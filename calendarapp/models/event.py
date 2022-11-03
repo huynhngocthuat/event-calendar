@@ -2,7 +2,6 @@ from datetime import datetime
 from django.db import models
 from django.urls import reverse
 from sqlalchemy import asc, null
-from torch import t
 
 from calendarapp.models import EventAbstract
 from accounts.models import User
